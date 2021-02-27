@@ -2,6 +2,7 @@
 const carga = document.getElementById("real-file");
 const btncarga = document.getElementById("botonAlternativo");
 const cstTex = document.getElementById("custom-text");
+document.getElementById("eliminar").addEventListener("click", deleteLaselemet);
 btncarga.addEventListener("click", function () {
   carga.click();
 });
@@ -91,7 +92,9 @@ function Datos(
     NuevaCotizacion.total +
     "</td></tr>");
 
-  // array con los precios
+  //@ aparicion de btn delete
+  let eliminar = document.getElementById("eliminar");
+  eliminar.removeAttribute("hidden");
 }
 /* carga de imagen */
 
@@ -120,6 +123,19 @@ function SumaCotizaciones(total) {
   mostrarTotal.innerHTML = "$" + sumaFormat;
   mostrarTotal.removeAttribute("hidden");
 }
+// Delete fuction
+function deleteLaselemet() {
+  let tbodyPadre = document.getElementById("tabla");
+  let last = tbodyPadre.lastChild;
+  totales.pop();
+  let resta = parseFloat(last.lastChild.textContent);
+  let total1 = document.getElementById("total").textContent;
+  let dato = parseFloat(total1.substring(1, 10));
+  let newtotal = dato - resta;
+  console.log(resta, dato);
+  document.getElementById("total").innerHTML = "$" + newtotal;
+  last.innerHTML = "";
+}
 
 // Prueba con session Storaje;
 
@@ -140,12 +156,12 @@ function finalizar() {
 
   let check = document.getElementById("flexCheckDefault").checked;
   if (check == true) {
-    sessionStorage.setItem('iva','PRECIO INCLUYE IVA')
+    sessionStorage.setItem("iva", "PRECIO INCLUYE IVA");
   } else {
-    sessionStorage.setItem('iva','PRECIO NO INCLUYE IVA')
+    sessionStorage.setItem("iva", "PRECIO NO INCLUYE IVA");
   }
 
-  let Fpago = document.getElementById('FormaPago').value;
+  let Fpago = document.getElementById("FormaPago").value;
   sessionStorage.setItem("formapago", Fpago);
 
   location.href = "html/pdf.html";
