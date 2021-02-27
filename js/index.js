@@ -135,6 +135,8 @@ function deleteLaselemet() {
   console.log(resta, dato);
   document.getElementById("total").innerHTML = "$" + newtotal;
   last.innerHTML = "";
+  let escondedenuevo = document.getElementById("eliminar");
+  escondedenuevo.setAttribute("hidden", "hidden");
 }
 
 // Prueba con session Storaje;
