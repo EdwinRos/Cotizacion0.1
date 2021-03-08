@@ -1,4 +1,13 @@
 //funciones del boton de carga
+window.onload = function () {
+  if (sessionStorage == null) {
+    location.href = "../index.html";
+  } else {
+    let user = sessionStorage.getItem("usser");
+    document.getElementById("usse").innerHTML = "Bienvenid@" + user;
+  }
+};
+
 const carga = document.getElementById("real-file");
 const btncarga = document.getElementById("botonAlternativo");
 const cstTex = document.getElementById("custom-text");
@@ -10,6 +19,9 @@ btncarga.addEventListener("click", function () {
 carga.addEventListener("change", function () {
   if (carga.value) {
     cstTex.innerText = carga.value;
+    let btnCarga = document.getElementById("cargarImagen");
+    btnCarga.removeAttribute("disabled");
+    btnCarga.classList.add("jello-horizontal");
   } else {
     cstTex.innerText = "No has seleccionado un archivo, aun";
   }
@@ -50,6 +62,8 @@ document.getElementById("generar").addEventListener("click", () => {
     descripcionProducto
   );
   SumaCotizaciones(fix2);
+  document.getElementById("finalizar").removeAttribute("disabled");
+  document.getElementById("finalizar").classList.add("jello-horizontal");
 });
 
 // objeto nueva cotizacion
@@ -94,7 +108,9 @@ function Datos(
 
   //@ aparicion de btn delete
   let eliminar = document.getElementById("eliminar");
+  eliminar.classList.remove("scale-out-hor-left");
   eliminar.removeAttribute("hidden");
+  eliminar.classList.add("focus-in-expand");
 }
 /* carga de imagen */
 
@@ -111,6 +127,7 @@ function cargarImagen() {
       img.removeAttribute("hidden");
     };
   }
+  document.getElementById("cargarImagen").classList.toggle("jello-horizontal");
 }
 // suma de cotizaciones
 let totales = [];
@@ -123,23 +140,29 @@ function SumaCotizaciones(total) {
   mostrarTotal.innerHTML = "$" + sumaFormat;
   mostrarTotal.removeAttribute("hidden");
 }
+
 // Delete fuction
 function deleteLaselemet() {
   let tbodyPadre = document.getElementById("tabla");
+  let contador = tbodyPadre.childElementCount;
   let last = tbodyPadre.lastChild;
   totales.pop();
   let resta = parseFloat(last.lastChild.textContent);
   let total1 = document.getElementById("total").textContent;
   let dato = parseFloat(total1.substring(1, 10));
   let newtotal = dato - resta;
-  console.log(resta, dato);
   document.getElementById("total").innerHTML = "$" + newtotal;
-  last.innerHTML = "";
-  let escondedenuevo = document.getElementById("eliminar");
-  escondedenuevo.setAttribute("hidden", "hidden");
+  tbodyPadre.removeChild(tbodyPadre.lastChild);
+  if (contador == 1) {
+    let btndelete = document.getElementById("eliminar");
+    btndelete.classList.remove("focus-in-expand");
+    btndelete.classList.add("scale-out-hor-left");
+    setTimeout(function () {
+      btndelete.setAttribute("hidden", "hidden");
+    }, 850);
+  } else {
+  }
 }
-
-// Prueba con session Storaje;
 
 let fina = document.getElementById("finalizar");
 fina.addEventListener("click", finalizar);
@@ -166,5 +189,5 @@ function finalizar() {
   let Fpago = document.getElementById("FormaPago").value;
   sessionStorage.setItem("formapago", Fpago);
 
-  location.href = "html/pdf.html";
+  location.href = "pdf.html";
 }
