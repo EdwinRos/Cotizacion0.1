@@ -1,6 +1,6 @@
 //funciones del boton de carga
 window.onload = function () {
-  if (sessionStorage == null) {
+  if (sessionStorage.getItem("usser") == null) {
     location.href = "../index.html";
   } else {
     let user = sessionStorage.getItem("usser");
