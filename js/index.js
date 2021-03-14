@@ -136,22 +136,21 @@ function SumaCotizaciones(total) {
   totales.push(parseFloat(totalarray));
   let sumaTotales = totales.reduce((a, b) => a + b, 0);
   let mostrarTotal = document.getElementById("total");
-  let sumaFormat = new Intl.NumberFormat().format(sumaTotales);
-  mostrarTotal.innerHTML = "$" + sumaFormat;
+  mostrarTotal.innerHTML = "$" + sumaTotales.toFixed(2);
   mostrarTotal.removeAttribute("hidden");
 }
+//nueva suma
+nuevoResult = () => {
+  let newSuma = totales.reduce((a, b) => a + b, 0);
+  document.getElementById("total").innerHTML = "$ " + newSuma.toFixed(2);
+};
 
 // Delete fuction
 function deleteLaselemet() {
   let tbodyPadre = document.getElementById("tabla");
   let contador = tbodyPadre.childElementCount;
-  let last = tbodyPadre.lastChild;
   totales.pop();
-  let resta = parseFloat(last.lastChild.textContent);
-  let total1 = document.getElementById("total").textContent;
-  let dato = parseFloat(total1.substring(1, 10));
-  let newtotal = dato - resta;
-  document.getElementById("total").innerHTML = "$" + newtotal;
+  nuevoResult();
   tbodyPadre.removeChild(tbodyPadre.lastChild);
   if (contador == 1) {
     let btndelete = document.getElementById("eliminar");

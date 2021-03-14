@@ -36,5 +36,13 @@ function datos() {
 
   document.getElementById("fecha").innerHTML = "FECHA: " + fecha;
   document.getElementById("forma").innerHTML =
-    "FORMAS DE PAGO: " + sessionStorage.getItem("formapago") ;
+    "FORMAS DE PAGO: " + sessionStorage.getItem("formapago");
 }
+
+let donate = document.getElementById("donate").addEventListener("click", () => {
+  window.open(
+    "https://www.paypal.com/donate?hosted_button_id=XBF6EJGHWLSVU",
+    (width = 300),
+    (height = 200)
+  );
+});
