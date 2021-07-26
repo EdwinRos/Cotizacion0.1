@@ -25,7 +25,7 @@ function datos() {
     sessionStorage.getItem("direcion");
   document.getElementById("total").innerHTML = sessionStorage.getItem("total");
   let tabla = sessionStorage.getItem("tabla");
-  document.getElementById("tabla").innerHTML = tabla;
+  document.getElementById("table").innerHTML = tabla;
   document.getElementById("iva").innerHTML = sessionStorage.getItem("iva");
   var d = new Date();
   let dia = d.getDate();

@@ -91,21 +91,14 @@ function Datos(
   divInfo.removeAttribute("hidden");
   let pInformacionCliente = (document.getElementById("clienteInfo").innerHTML =
     NuevaCotizacion.cliente);
-  let tbody = (document.getElementById("tabla").innerHTML +=
-    "<tr><td>" +
-    NuevaCotizacion.cantidadProductos +
-    "</td><td>" +
-    NuevaCotizacion.descripcion +
-    "</td><td>" +
-    `<img src='${
-      document.getElementById("img").src
-    }' width='50' height='50' >` +
-    "</td><td>" +
-    NuevaCotizacion.precioUnitario +
-    "</td><td>" +
-    NuevaCotizacion.total +
-    "</td></tr>");
-
+  let tbody = (document.getElementById("tablaP").innerHTML +=
+    "<tr>" +
+    "  <td>" +NuevaCotizacion.cantidadProductos +"</td>" +
+    "  <td>" + NuevaCotizacion.descripcion + "</td>"+
+    "  <td>" +`<img src='${document.getElementById("img").src}' width='50' height='50' alt='CotizacionImg' title='Cotizacionimg' >` + "</td>"+
+    "  <td>" + NuevaCotizacion.precioUnitario +"</td>"+
+    "  <td>" + NuevaCotizacion.total +"</td>"+
+    "</tr>");
   //@ aparicion de btn delete
   let eliminar = document.getElementById("eliminar");
   eliminar.classList.remove("scale-out-hor-left");
@@ -147,7 +140,7 @@ nuevoResult = () => {
 
 // Delete fuction
 function deleteLaselemet() {
-  let tbodyPadre = document.getElementById("tabla");
+  let tbodyPadre = document.getElementById("tablaP");
   let contador = tbodyPadre.childElementCount;
   totales.pop();
   nuevoResult();
